@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">Puppies</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_puppies">Happy Puppy</string>
+    <string name="puppies_image">Puppies App</string>
+    <string name="go_to_the_puppies_list">go to the puppies list</string>
+    <string name="list_puppies">List Puppies</string>
+    <string name="title_activity_puppies">Happy Puppy</string>
+    <string name="puppy_headshot">Puppy headshot</string>
+    <string name="leandog_powered">powered by LeanDog</string>
+    <string name="content_happy_puppy">Happy Puppy</string>
+    <string name="title_activity_puppy_tale">Puppy Tale</string>
+
+</resources>

@@ -1,0 +1,21 @@
+require 'rubygems'
+require 'cucumber'
+require 'cucumber/rake/task'
+
+Cucumber::Rake::Task.new(:features) do |t|
+  t.profile = 'default'
+end
+
+desc 'Build the puppy app'
+task :build_app do
+  `ant -f ../app/build.xml debug`
+end
+
+task :cucumber => :features 
+
+
+task :default => [] do
+  Rake::Task[:build_app].execute
+  Rake::Task[:features].execute
+end
+

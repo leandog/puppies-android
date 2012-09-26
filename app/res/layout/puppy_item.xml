@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/headshot"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/puppy_headshot"
+        android:scaleType="fitEnd" />
+
+    <RelativeLayout
+        android:id="@+id/header_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/headshot" >
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/breed"
+            style="@style/Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/gender"
+            style="@style/Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/breed" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/age"
+        style="@style/Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/header_info"
+        android:layout_below="@+id/header_info" />
+
+    <TextView
+        android:id="@+id/summary"
+        style="@style/Summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/header_info"
+        android:layout_below="@+id/age"
+        android:ellipsize="end"
+        android:singleLine="true" />
+
+</RelativeLayout>
