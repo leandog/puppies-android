@@ -20,7 +20,6 @@ public class PuppiesActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_puppies, menu);
         return true;
     }
-
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
