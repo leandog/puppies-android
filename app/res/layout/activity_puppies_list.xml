@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="312dip"
+        android:layout_height="440dip"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/animation_paws" />
+
+    <ListView
+        android:id="@+id/the_puppies_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        tools:context=".PuppiesListActivity" />
+
+</LinearLayout>

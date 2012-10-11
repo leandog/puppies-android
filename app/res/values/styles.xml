@@ -1,5 +1,40 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="HorizontalRule">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:background">#77cccccc</item>
+    </style>
+
+    <style name="Title">
+        <item name="android:textColor">#2eb4e0</item>
+        <item name="android:textSize">@dimen/large_header</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Subtitle">
+        <item name="android:textColor">#3582c1</item>
+        <item name="android:textSize">@dimen/normal</item>
+    </style>
+
+    <style name="Summary">
+        <item name="android:textColor">#87b5c1</item>
+        <item name="android:textSize">@dimen/medium_header</item>
+    </style>
+
+    <style name="Normal">
+        <item name="android:textSize">@dimen/normal</item>
+        <item name="android:textColor">#a3a3a3a3</item>
+    </style>
+
+    <style name="Emphasis">
+        <item name="android:textSize">@dimen/medium_header</item>
+    </style>
 
 </resources>

@@ -1,18 +1,22 @@
 package com.leandog.puppies;
 
-import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+
+import com.leandog.puppies.R.layout;
 
 public class PuppiesActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_puppies);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(layout.activity_puppies);
+
+        initializeActionBar();
     }
 
     @Override
@@ -20,15 +24,21 @@ public class PuppiesActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_puppies, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+        case android.R.id.home:
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initializeActionBar() {
+        final ActionBar theActionBar = getActionBar();
+        theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        theActionBar.setCustomView(layout.happy_banner);
     }
 
 }
