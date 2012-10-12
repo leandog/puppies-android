@@ -3,6 +3,7 @@
 	<name>puppies_unit</name>
 	<comment></comment>
 	<projects>
+		<project>puppies_app</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
