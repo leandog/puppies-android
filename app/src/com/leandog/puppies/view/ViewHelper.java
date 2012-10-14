@@ -40,6 +40,22 @@ public class ViewHelper {
     public static void setText(final View view, final int id, final Spanned spanned) {
         textView(view, id).setText(spanned);
     }
+    
+    public static void show(final Activity activity, final int id) {
+        activity.findViewById(id).setVisibility(View.VISIBLE);
+    }
+    
+    public static void show(final View view, final int id) {
+        view.findViewById(id).setVisibility(View.VISIBLE);
+    }
+    
+    public static void hide(final Activity activity, final int id) {
+        activity.findViewById(id).setVisibility(View.GONE);
+    }
+    
+    public static void hide(final View view, final int id) {
+        view.findViewById(id).setVisibility(View.GONE);
+    }
 
     private static TextView textView(final Activity activity, final int id) {
         final TextView textView = findFor(activity, id);
