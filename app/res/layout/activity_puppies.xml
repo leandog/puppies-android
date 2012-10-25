@@ -11,4 +11,11 @@
         android:layout_centerVertical="true"
         android:indeterminateDrawable="@drawable/animation_paws" />
 
+    <ListView
+        android:id="@+id/the_puppies_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
 </RelativeLayout>
