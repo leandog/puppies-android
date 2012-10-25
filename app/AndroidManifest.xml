@@ -6,7 +6,7 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="15" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -18,9 +18,17 @@
             android:label="@string/title_activity_puppies" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".PuppyTaleActivity"
+            android:label="@string/title_activity_puppy_tale" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="PuppiesActivity" />
         </activity>
     </application>
 

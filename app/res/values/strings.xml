@@ -11,5 +11,6 @@
     <string name="puppy_headshot">Puppy headshot</string>
     <string name="leandog_powered">powered by LeanDog</string>
     <string name="content_happy_puppy">Happy Puppy</string>
+    <string name="title_activity_puppy_tale">Puppy Tale</string>
 
 </resources>
