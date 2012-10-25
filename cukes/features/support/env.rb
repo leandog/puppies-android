@@ -15,7 +15,7 @@ keystore = {
   :keystore_password => 'android'
 }
 
-server = Brazenhead::Server.new('../app/bin/puppies_app.apk', keystore)
+server = Brazenhead::Server.new('../app/bin/puppies_app-debug.apk', keystore)
 
 class Driver
   include Brazenhead
