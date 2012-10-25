@@ -9,7 +9,7 @@ require_rel 'screens'
 World(Gametel::Navigation)
 
 keystore = {
-  :path => File.expand_path('debug.keystore'),
+  :path => File.expand_path('./features/support/debug.keystore'),
   :alias => 'androiddebugkey',
   :password => 'android',
   :keystore_password => 'android'
