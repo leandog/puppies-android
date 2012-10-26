@@ -1,15 +1,36 @@
 package com.leandog.puppies;
 
+import static com.leandog.puppies.view.ViewHelper.findFor;
+import static com.leandog.puppies.view.ViewHelper.hide;
+import static com.leandog.puppies.view.ViewHelper.setText;
+
+import java.util.List;
+
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.*;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
+import com.leandog.puppies.data.PuppiesLoader;
+import com.leandog.puppies.data.Puppy;
 
 public class PuppiesActivity extends Activity {
+
+    private final PuppiesLoader puppiesLoader;
+    
+    public PuppiesActivity() {
+        this(new PuppiesLoader());
+    }
+
+    public PuppiesActivity(PuppiesLoader puppiesLoader) {
+        this.puppiesLoader = puppiesLoader;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,6 +38,10 @@ public class PuppiesActivity extends Activity {
         setContentView(layout.activity_puppies);
 
         initializeActionBar();
+        
+        final ListView thePuppies = findFor(this, id.the_puppies_list);
+        thePuppies.setAdapter(new PuppyAdapter(this, puppiesLoader.load()));
+        hide(this, id.loading);
     }
 
     @Override
@@ -39,6 +64,32 @@ public class PuppiesActivity extends Activity {
         final ActionBar theActionBar = getActionBar();
         theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         theActionBar.setCustomView(layout.happy_banner);
+    }
+    
+    private class PuppyAdapter extends ArrayAdapter<Puppy> {
+
+        private final List<Puppy> puppies;
+
+        public PuppyAdapter(Context context, final List<Puppy> puppies) {
+            super(context, layout.puppy_item, puppies);
+            this.puppies = puppies;
+        }
+        
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View theView = convertView;
+            
+            if( theView == null) {
+                LayoutInflater inflater = (LayoutInflater) getApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                theView = inflater.inflate(layout.puppy_item, null);
+            }
+            
+            final Puppy thePuppy = puppies.get(position);
+            setText(theView, id.name, thePuppy.getName());
+            
+            return theView;
+        }
+        
     }
 
 }
