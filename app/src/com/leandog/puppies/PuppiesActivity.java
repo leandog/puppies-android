@@ -9,15 +9,16 @@ import java.util.List;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.Html;
 import android.view.*;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.*;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.gson.Gson;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.PuppiesLoader;
@@ -46,6 +47,7 @@ public class PuppiesActivity extends Activity {
         initializeActionBar();
 
         final ListView thePuppies = findFor(this, id.the_puppies_list);
+        thePuppies.setOnItemClickListener(new OnDisplayThePuppyTale(thePuppies));
         new AsyncPuppiesLoader(thePuppies).execute();
     }
 
@@ -69,6 +71,21 @@ public class PuppiesActivity extends Activity {
         final ActionBar theActionBar = getActionBar();
         theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         theActionBar.setCustomView(layout.happy_banner);
+    }
+
+    private final class OnDisplayThePuppyTale implements OnItemClickListener {
+        private final ListView thePuppies;
+
+        private OnDisplayThePuppyTale(ListView thePuppies) {
+            this.thePuppies = thePuppies;
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+            final Intent theDetails = new Intent(PuppiesActivity.this, PuppyTaleActivity.class);
+            theDetails.putExtra("thePuppy", new Gson().toJson(thePuppies.getItemAtPosition(position)));
+            startActivity(theDetails);
+        }
     }
 
     private final class AsyncPuppiesLoader extends AsyncTask<Void, Void, List<Puppy>> {
