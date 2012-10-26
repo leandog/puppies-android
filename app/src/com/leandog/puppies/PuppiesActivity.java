@@ -9,6 +9,7 @@ import java.util.List;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.*;
@@ -23,7 +24,7 @@ import com.leandog.puppies.data.Puppy;
 public class PuppiesActivity extends Activity {
 
     private final PuppiesLoader puppiesLoader;
-    
+
     public PuppiesActivity() {
         this(new PuppiesLoader());
     }
@@ -38,10 +39,9 @@ public class PuppiesActivity extends Activity {
         setContentView(layout.activity_puppies);
 
         initializeActionBar();
-        
+
         final ListView thePuppies = findFor(this, id.the_puppies_list);
-        thePuppies.setAdapter(new PuppyAdapter(this, puppiesLoader.load()));
-        hide(this, id.loading);
+        new AsyncPuppiesLoader(thePuppies).execute();
     }
 
     @Override
@@ -65,7 +65,25 @@ public class PuppiesActivity extends Activity {
         theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         theActionBar.setCustomView(layout.happy_banner);
     }
-    
+
+    private final class AsyncPuppiesLoader extends AsyncTask<Void, Void, List<Puppy>> {
+        private final ListView thePuppies;
+
+        private AsyncPuppiesLoader(ListView thePuppies) {
+            this.thePuppies = thePuppies;
+        }
+
+        @Override
+        protected List<Puppy> doInBackground(Void... params) {
+            return puppiesLoader.load();
+        }
+
+        protected void onPostExecute(java.util.List<Puppy> puppies) {
+            thePuppies.setAdapter(new PuppyAdapter(PuppiesActivity.this, puppies));
+            hide(PuppiesActivity.this, id.loading);
+        }
+    }
+
     private class PuppyAdapter extends ArrayAdapter<Puppy> {
 
         private final List<Puppy> puppies;
@@ -74,22 +92,22 @@ public class PuppiesActivity extends Activity {
             super(context, layout.puppy_item, puppies);
             this.puppies = puppies;
         }
-        
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View theView = convertView;
-            
-            if( theView == null) {
+
+            if (theView == null) {
                 LayoutInflater inflater = (LayoutInflater) getApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 theView = inflater.inflate(layout.puppy_item, null);
             }
-            
+
             final Puppy thePuppy = puppies.get(position);
             setText(theView, id.name, thePuppy.getName());
-            
+
             return theView;
         }
-        
+
     }
 
 }
