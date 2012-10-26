@@ -30,4 +30,15 @@ Then /^I can see that "(.*?)"s description starts with "(.*?)"$/ do |name, descr
   end
 end
 
+Given /^I am looking at the available puppies$/ do
+  on(PuppyList).wait_for_text "Hanna"
+end
+
+When /^I want to learn more information about "(.*?)"$/ do |name|
+  on(PuppyList).send name
+end
+
+Then /^I will be able to see "(.*?)"s details$/ do |name|
+  on(PuppyDetails).name.should == name
+end
 
