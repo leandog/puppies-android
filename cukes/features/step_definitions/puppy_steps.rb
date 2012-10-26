@@ -23,4 +23,11 @@ Then /^I will be moved when I look into "(.*?)"s eyes$/ do |name|
   end
 end
 
+Then /^I can see that "(.*?)"s description starts with "(.*?)"$/ do |name, description|
+  on(PuppyList) do |screen|
+    view = screen.view_for name
+    view.should have_text description
+  end
+end
+
 
