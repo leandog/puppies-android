@@ -12,6 +12,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Html;
 import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -110,6 +111,7 @@ public class PuppiesActivity extends Activity {
             setText(theView, id.name, thePuppy.getName());
             setText(theView, id.breed, thePuppy.getBreed());
             setText(theView, id.gender, thePuppy.getGender());
+            setText(theView, id.summary, Html.fromHtml(thePuppy.getDescription()));
 
             final ImageView theHeadshot = findFor(theView, id.headshot);
             puppyImageLoader.bind(theHeadshot, thePuppy.getImageUrl());

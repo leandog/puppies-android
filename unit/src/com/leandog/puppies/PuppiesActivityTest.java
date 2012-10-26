@@ -88,6 +88,15 @@ public class PuppiesActivityTest {
         final View thePuppy = thePuppies().getChildAt(0);
         assertThat(textOf(thePuppy, id.gender), is("Female"));
     }
+    
+    @Test
+    public void itDisplaysTheSummary() {
+        thePuppiesAre(new Puppy() {{ setDescription("the description"); }});
+        createActivity();
+        
+        final View thePuppy = thePuppies().getChildAt(0);
+        assertThat(textOf(thePuppy, id.summary), is("the description"));
+    }
 
     @Test
     public void itDisplaysTheirBeautifulFace() {
@@ -96,7 +105,6 @@ public class PuppiesActivityTest {
         
         final ImageView theHeadshot = findFor(activity, id.headshot);
         verify(puppyImageLoader).bind(theHeadshot, "http://10.0.1.4:3000/assets/sparky.png");
-        
     }
     
     private void thePuppiesAre(final Puppy...puppies) {

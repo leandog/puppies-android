@@ -7,6 +7,7 @@ public class Puppy {
         public String breed;
         public String gender;
         public String image_url;
+        public String description;
     }
     
     private Info puppy = new Info();
@@ -47,6 +48,14 @@ public class Puppy {
 
     public String getImageUrl() {
         return String.format("http://10.0.1.4:3000/assets/%s", puppy.image_url);
+    }
+    
+    public void setDescription(final String description) {
+        puppy.description = description;
+    }
+
+    public String getDescription() {
+        return null == puppy.description ? "" : puppy.description;
     }
 
 }
