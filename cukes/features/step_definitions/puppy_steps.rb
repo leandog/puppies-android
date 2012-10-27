@@ -30,12 +30,9 @@ Then /^I can see that "(.*?)"s description starts with "(.*?)"$/ do |name, descr
   end
 end
 
-Given /^I am looking at the available puppies$/ do
-  on(PuppyList).wait_for_text "Hanna"
-end
-
 When /^I want to learn more information about "(.*?)"$/ do |name|
-  on(PuppyList).send name
+  on(PuppyList).details_for name
+  on(PuppyDetails).should be_active
 end
 
 Then /^I will be able to see "(.*?)"s details$/ do |name|
