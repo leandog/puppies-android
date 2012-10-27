@@ -107,7 +107,7 @@ public class PuppiesActivityTest {
         createActivity();
         
         final ImageView theHeadshot = findFor(activity, id.headshot);
-        verify(puppyImageLoader).bind(theHeadshot, "http://10.0.1.4:3000/assets/sparky.png");
+        verify(puppyImageLoader).bind(theHeadshot, "http://puppies.herokuapp.com/assets/sparky.png");
     }
     
     @Test

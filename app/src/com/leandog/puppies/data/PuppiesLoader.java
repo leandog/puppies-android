@@ -15,7 +15,7 @@ public class PuppiesLoader {
 
     public List<Puppy> load() {
         try {
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://10.0.1.4:3000/puppies.json").openStream()));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(new URL("http://puppies.herokuapp.com/puppies.json").openStream()));
             
             final StringBuilder content = new StringBuilder();
             String line = null;

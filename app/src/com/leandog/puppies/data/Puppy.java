@@ -47,7 +47,7 @@ public class Puppy {
     }
 
     public String getImageUrl() {
-        return String.format("http://10.0.1.4:3000/assets/%s", puppy.image_url);
+        return String.format("http://puppies.herokuapp.com/assets/%s", puppy.image_url);
     }
     
     public void setDescription(final String description) {
