@@ -11,7 +11,6 @@ Feature: Displaying the details of a puppy
     Then I know that they are a type of "Austrailian Cattle Dog (Blue Heeler)"
     And I know that they are a "Male"
 
-  @notready
   Scenario: Learning more about the life of my puppy
     Given I am looking at the available puppies
     When I want to learn more information about "Spud"
