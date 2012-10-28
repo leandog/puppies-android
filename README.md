@@ -9,4 +9,5 @@ The [m3conf branch](https://github.com/leandog/puppies-android/tree/m3conf) is t
 ```
 cd cukes
 bundle
+rake
 ```
