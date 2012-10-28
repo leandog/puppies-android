@@ -3,4 +3,5 @@
     <dimen name="large_header">25sp</dimen>
     <dimen name="medium_header">15sp</dimen>
     <dimen name="normal">11sp</dimen>
+    <dimen name="small">8sp</dimen>
 </resources>
