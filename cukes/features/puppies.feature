@@ -9,7 +9,6 @@ Feature:  Displaying information about puppies that are available for adoption
     Then I can see that "Ruby Sue" is a "Pit Bull Terrier"
     And I can see that "Ruby Sue" is a "Female"
 
-  @notready
   Scenario: Being overwhelmed by the cuteness of the available puppies
     When I am looking at the available puppies
     Then I will be moved when I look into "Maggie Mae"s eyes

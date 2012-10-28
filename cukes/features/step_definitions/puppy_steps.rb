@@ -15,3 +15,10 @@ Then /^I can see that "(.*?)" is a "(.*?)"$/ do |name, value|
     view.should have_text value
   end
 end
+
+Then /^I will be moved when I look into "(.*?)"s eyes$/ do |name|
+  on(PuppyList) do |screen|
+    view = screen.view_for name
+    view.should have_image
+  end
+end
