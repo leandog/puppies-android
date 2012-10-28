@@ -21,6 +21,8 @@ public class PuppyTaleActivity extends Activity {
         
         final Puppy thePuppy = getPuppy();
         setText(this, id.name, thePuppy.getName());
+        setText(this, id.breed, thePuppy.getBreed());
+        setText(this, id.gender, thePuppy.getGender());
     }
 
     @Override

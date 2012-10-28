@@ -29,6 +29,19 @@ public class PuppyTaleActivityTest {
         createActivityWith(new Puppy("Sparky"));
         assertThat(textOf(activity, id.name), is("Sparky"));
     }
+    
+    @Test
+    public void itDisplaysTheBreed() {
+        createActivityWith(new Puppy("", "Terrier"));
+        assertThat(textOf(activity, id.breed), is("Terrier"));
+    }
+    
+    @Test
+    public void itDisplaysTheGender() {
+        createActivityWith(new Puppy("", "", "Female"));
+        assertThat(textOf(activity, id.gender), is("Female"));
+    }
+    
 
     private void createActivityWith(final Puppy puppy) {
         activity.setIntent(puppyIntent(puppy));
