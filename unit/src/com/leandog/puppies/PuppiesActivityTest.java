@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -23,6 +24,7 @@ import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.test.PuppiesTestRunner;
+import com.leandog.puppies.view.PuppyImageLoader;
 import com.leandog.puppies.view.ViewHelper;
 
 @RunWith(PuppiesTestRunner.class)
@@ -31,10 +33,11 @@ public class PuppiesActivityTest {
     private PuppiesActivity activity;
     
     @Mock PuppiesLoader puppiesLoader;
+    @Mock PuppyImageLoader puppyImageLoader;
 
     @Before
     public void setUp() {
-        activity = new PuppiesActivity(puppiesLoader);
+        activity = new PuppiesActivity(puppiesLoader, puppyImageLoader);
     }
     
     @Test
@@ -73,6 +76,14 @@ public class PuppiesActivityTest {
     public void itDisplaysTheirGender() {
         setupActivityToFind(new Puppy("", "", "Female"));
         assertThat(textOf(thePuppyAt(0), id.gender), is("Female"));
+    }
+    
+    @Test
+    public void itDisplaysTheirBeautifulFace() {
+        setupActivityToFind(new Puppy() {{ setImageUrl("sparky.png"); }});
+        
+        final ImageView theHeadshot = findFor(activity, id.headshot);
+        verify(puppyImageLoader).bind(theHeadshot, "http://puppies.herokuapp.com/assets/sparky.png");
     }
 
     private void createActivity() {

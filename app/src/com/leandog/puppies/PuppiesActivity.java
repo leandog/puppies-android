@@ -14,23 +14,27 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.*;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
+import com.leandog.puppies.view.PuppyImageLoader;
 
 public class PuppiesActivity extends Activity {
 
     private final PuppiesLoader puppiesLoader;
+    private final PuppyImageLoader puppyImageLoader;
 
     public PuppiesActivity() {
-        this(new PuppiesLoader());
+        this(new PuppiesLoader(), new PuppyImageLoader());
     }
 
-    public PuppiesActivity(final PuppiesLoader puppiesLoader) {
+    public PuppiesActivity(final PuppiesLoader puppiesLoader, final PuppyImageLoader puppyImageLoader) {
         this.puppiesLoader = puppiesLoader;
+        this.puppyImageLoader = puppyImageLoader;
     }
 
     @Override
@@ -105,6 +109,9 @@ public class PuppiesActivity extends Activity {
             setText(theView, id.name, thePuppy.getName());
             setText(theView, id.breed, thePuppy.getBreed());
             setText(theView, id.gender, thePuppy.getGender());
+            
+            final ImageView theHeadshot = findFor(theView, id.headshot);
+            puppyImageLoader.bind(theHeadshot, thePuppy.getImageUrl());
 
             return theView;
         }

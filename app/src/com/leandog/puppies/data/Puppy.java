@@ -33,10 +33,19 @@ public class Puppy {
     public String getGender() {
         return puppy.gender;
     }
+    
+    public void setImageUrl(final String imageUrl) {
+        puppy.image_url = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return String.format("http://puppies.herokuapp.com/assets/%s", puppy.image_url);
+    }
 
     private class Info {
         public String name;
         public String breed;
         public String gender;
+        public String image_url;
     }
 }
