@@ -60,17 +60,13 @@ public class PuppiesActivityTest {
     @Test
     public void itDisplaysTheirName() {
         setupActivityToFind(new Puppy("Sparky"));
-        
-        final View thePuppy = thePuppies().getChildAt(0);
-        assertThat(textOf(thePuppy, id.name), is("Sparky"));
+        assertThat(textOf(thePuppyAt(0), id.name), is("Sparky"));
     }
     
     @Test
     public void itDisplaysTheirBreed() {
         setupActivityToFind(new Puppy("", "Terrier"));
-        
-        final View thePuppy = thePuppies().getChildAt(0);
-        assertThat(textOf(thePuppy, id.breed), is("Terrier"));
+        assertThat(textOf(thePuppyAt(0), id.breed), is("Terrier"));
     }
 
     private void createActivity() {
@@ -85,6 +81,10 @@ public class PuppiesActivityTest {
 
     private ListView thePuppies() {
         return ViewHelper.<ListView>findFor(activity, id.the_puppies_list);
+    }
+
+    private View thePuppyAt(int index) {
+        return thePuppies().getChildAt(index);
     }
 
 }
