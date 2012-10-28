@@ -1,5 +1,6 @@
 package com.leandog.puppies;
 
+import static com.leandog.puppies.view.ViewHelper.hide;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.PuppiesLoader;
 
@@ -29,6 +31,7 @@ public class PuppiesActivity extends Activity {
 
         initializeActionBar();
         puppiesLoader.load();
+        hide(this, id.loading);
     }
 
     @Override
