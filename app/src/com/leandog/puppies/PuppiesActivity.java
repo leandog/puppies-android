@@ -28,7 +28,6 @@ public class PuppiesActivity extends Activity {
         setContentView(layout.activity_puppies);
 
         initializeActionBar();
-        
         puppiesLoader.load();
     }
 
