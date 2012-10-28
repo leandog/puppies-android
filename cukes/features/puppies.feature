@@ -4,7 +4,6 @@ Feature:  Displaying information about puppies that are available for adoption
     When I am looking at the available puppies
     Then I can see that "Sparky" is available for adoption
 
-  @notready
   Scenario: Knows the breed and gender of available puppies
     When I am looking at the available puppies
     Then I can see that "Ruby Sue" is a "Pit Bull Terrier"

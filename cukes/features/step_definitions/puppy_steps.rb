@@ -8,3 +8,10 @@ Then /^I can see that "(.*?)" is available for adoption$/ do |name|
     view.should have_text name
   end
 end
+
+Then /^I can see that "(.*?)" is a "(.*?)"$/ do |name, value|
+  on(PuppyList) do |screen|
+    view = screen.view_for name
+    view.should have_text value
+  end
+end
