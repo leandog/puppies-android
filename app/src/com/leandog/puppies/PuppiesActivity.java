@@ -2,6 +2,7 @@ package com.leandog.puppies;
 
 import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.hide;
+import static com.leandog.puppies.view.ViewHelper.setText;
 
 import java.util.List;
 
@@ -67,8 +68,11 @@ public class PuppiesActivity extends Activity {
 
     private class PuppyAdapter extends ArrayAdapter<Puppy> {
 
+        private final List<Puppy> puppies;
+
         public PuppyAdapter(Context context, final List<Puppy> puppies) {
             super(context, layout.puppy_item, puppies);
+            this.puppies = puppies;
         }
 
         @Override
@@ -78,6 +82,9 @@ public class PuppiesActivity extends Activity {
             if (theView == null) {
                 theView = getInflater().inflate(layout.puppy_item, null);
             }
+            
+            final Puppy thePuppy = puppies.get(position);
+            setText(theView, id.name, thePuppy.getName());
 
             return theView;
         }

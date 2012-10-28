@@ -1,6 +1,7 @@
 package com.leandog.puppies;
 
 import static com.leandog.puppies.view.ViewHelper.findFor;
+import static com.leandog.puppies.view.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -56,6 +57,15 @@ public class PuppiesActivityTest {
         createActivity();
         
         assertThat(thePuppies().getChildCount(), is(2));
+    }
+    
+    @Test
+    public void itDisplaysTheirName() {
+        thePuppiesAre(new Puppy("Sparky"));
+        createActivity();
+        
+        final View thePuppy = thePuppies().getChildAt(0);
+        assertThat(textOf(thePuppy, id.name), is("Sparky"));
     }
 
     private void createActivity() {
