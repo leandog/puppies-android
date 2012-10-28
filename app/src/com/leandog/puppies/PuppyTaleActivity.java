@@ -38,6 +38,7 @@ public class PuppyTaleActivity extends Activity {
         setText(this, id.breed, thePuppy.getBreed());
         setText(this, id.gender, thePuppy.getGender());
         setText(this, id.description, Html.fromHtml(thePuppy.getDescription()));
+        setText(this, id.adoption_fee, String.format("$%.2f", thePuppy.getFee()));
         
         final ImageView theHeadshot = findFor(this, id.headshot);
         puppyImageLoader.bind(theHeadshot, thePuppy.getImageUrl());

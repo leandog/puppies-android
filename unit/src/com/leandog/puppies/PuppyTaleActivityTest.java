@@ -58,6 +58,14 @@ public class PuppyTaleActivityTest {
     }
     
     @Test
+    public void itDisplaysTheirFee() {
+        final Puppy thePuppy = new Puppy();
+        thePuppy.setFee(42.0f);
+        createActivityWith(thePuppy);
+        assertThat(textOf(activity, id.adoption_fee), is("$42.00"));;
+    }
+    
+    @Test
     public void itDisplaysTheirBeautifulFace() {
         final Puppy thePuppy = new Puppy();
         thePuppy.setImageUrl("sparky.png");

@@ -52,6 +52,14 @@ public class Puppy {
         return puppy.description == null ? "" : puppy.description;
     }
 
+    public void setFee(float fee) {
+        puppy.fees = fee;
+    }
+
+    public float getFee() {
+        return puppy.fees;
+    }
+
     public String toJson() {
         return new Gson().toJson(this);
     }
@@ -66,5 +74,6 @@ public class Puppy {
         public String gender;
         public String image_url;
         public String description;
+        public float fees;
     }
 }
