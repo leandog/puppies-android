@@ -9,6 +9,7 @@ import java.util.List;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.*;
@@ -40,8 +41,7 @@ public class PuppiesActivity extends Activity {
         initializeActionBar();
 
         final ListView thePuppies = findFor(this, id.the_puppies_list);
-        thePuppies.setAdapter(new PuppyAdapter(this, puppiesLoader.load()));
-        hide(this, id.loading);
+        new AsyncPuppiesLoader(thePuppies).execute();
     }
 
     @Override
@@ -66,6 +66,24 @@ public class PuppiesActivity extends Activity {
         theActionBar.setCustomView(layout.happy_banner);
     }
 
+    private final class AsyncPuppiesLoader extends AsyncTask<Void, Void, List<Puppy>> {
+        private final ListView thePuppies;
+
+        private AsyncPuppiesLoader(ListView thePuppies) {
+            this.thePuppies = thePuppies;
+        }
+
+        @Override
+        protected List<Puppy> doInBackground(Void... params) {
+            return puppiesLoader.load();
+        }
+
+        protected void onPostExecute(List<Puppy> puppies) {
+            thePuppies.setAdapter(new PuppyAdapter(PuppiesActivity.this, puppies));
+            hide(PuppiesActivity.this, id.loading);
+        }
+    }
+
     private class PuppyAdapter extends ArrayAdapter<Puppy> {
 
         private final List<Puppy> puppies;
@@ -82,7 +100,7 @@ public class PuppiesActivity extends Activity {
             if (theView == null) {
                 theView = getInflater().inflate(layout.puppy_item, null);
             }
-            
+
             final Puppy thePuppy = puppies.get(position);
             setText(theView, id.name, thePuppy.getName());
 
