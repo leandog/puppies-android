@@ -1,19 +1,22 @@
 package com.leandog.puppies.data;
 
 public class Puppy {
-
-    private final String name;
     
+    private Info puppy = new Info();
+
     public Puppy() {
         this("");
     }
 
     public Puppy(final String name) {
-        this.name = name;
+        puppy.name = name;
     }
 
     public String getName() {
-        return name;
+        return puppy.name;
     }
 
+    private class Info {
+        String name;
+    }
 }
