@@ -1,1 +1,1 @@
-default: --no-source --color --format pretty 
+default: --tags ~@notready --no-source --color --format pretty 
