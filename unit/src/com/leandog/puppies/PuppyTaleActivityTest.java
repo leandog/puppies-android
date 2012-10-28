@@ -1,27 +1,34 @@
 package com.leandog.puppies;
 
+import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.textOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 
 import android.content.Intent;
+import android.widget.ImageView;
 
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.test.PuppiesTestRunner;
+import com.leandog.puppies.view.PuppyImageLoader;
 
 @RunWith(PuppiesTestRunner.class)
 public class PuppyTaleActivityTest {
     
     private PuppyTaleActivity activity;
+    
+    @Mock PuppyImageLoader puppyImageLoader;
 
     @Before
     public void setUp() {
-        activity = new PuppyTaleActivity();
+        activity = new PuppyTaleActivity(puppyImageLoader);
     }
 
     @Test
@@ -48,6 +55,16 @@ public class PuppyTaleActivityTest {
         thePuppy.setDescription("Expected description");
         createActivityWith(thePuppy);
         assertThat(textOf(activity, id.description), is("Expected description"));
+    }
+    
+    @Test
+    public void itDisplaysTheirBeautifulFace() {
+        final Puppy thePuppy = new Puppy();
+        thePuppy.setImageUrl("sparky.png");
+        createActivityWith(thePuppy);
+        
+        final ImageView theHeadshot = findFor(activity, id.headshot);
+        verify(puppyImageLoader).bind(theHeadshot, "http://puppies.herokuapp.com/assets/sparky.png");
     }
 
     private void createActivityWith(final Puppy puppy) {
