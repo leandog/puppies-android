@@ -53,16 +53,13 @@ public class PuppiesActivityTest {
     
     @Test
     public void itListsThePuppies() {
-        thePuppiesAre(new Puppy(), new Puppy());
-        createActivity();
-        
+        setupActivityToFind(new Puppy(), new Puppy());
         assertThat(thePuppies().getChildCount(), is(2));
     }
     
     @Test
     public void itDisplaysTheirName() {
-        thePuppiesAre(new Puppy("Sparky"));
-        createActivity();
+        setupActivityToFind(new Puppy("Sparky"));
         
         final View thePuppy = thePuppies().getChildAt(0);
         assertThat(textOf(thePuppy, id.name), is("Sparky"));
@@ -72,9 +69,10 @@ public class PuppiesActivityTest {
         shadowOf(activity).create();
     }
 
-    private void thePuppiesAre(final Puppy...puppies) {
+    private void setupActivityToFind(final Puppy...puppies) {
         when(puppiesLoader.load())
             .thenReturn(Arrays.asList(puppies));
+        createActivity();
     }
 
     private ListView thePuppies() {
