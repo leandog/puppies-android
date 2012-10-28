@@ -64,6 +64,14 @@ public class PuppiesActivityTest {
         final View thePuppy = thePuppies().getChildAt(0);
         assertThat(textOf(thePuppy, id.name), is("Sparky"));
     }
+    
+    @Test
+    public void itDisplaysTheirBreed() {
+        setupActivityToFind(new Puppy("", "Terrier"));
+        
+        final View thePuppy = thePuppies().getChildAt(0);
+        assertThat(textOf(thePuppy, id.breed), is("Terrier"));
+    }
 
     private void createActivity() {
         shadowOf(activity).create();

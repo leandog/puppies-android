@@ -103,6 +103,7 @@ public class PuppiesActivity extends Activity {
 
             final Puppy thePuppy = puppies.get(position);
             setText(theView, id.name, thePuppy.getName());
+            setText(theView, id.breed, thePuppy.getBreed());
 
             return theView;
         }
