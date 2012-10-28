@@ -1,12 +1,16 @@
 package com.leandog.puppies;
 
-import com.leandog.puppies.R.layout;
-
-import android.os.Bundle;
+import static com.leandog.puppies.view.ViewHelper.setText;
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+
+import com.google.gson.Gson;
+import com.leandog.puppies.R.id;
+import com.leandog.puppies.R.layout;
+import com.leandog.puppies.data.Puppy;
 
 public class PuppyTaleActivity extends Activity {
 
@@ -15,6 +19,9 @@ public class PuppyTaleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_puppy_tale);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        final Puppy thePuppy = new Gson().fromJson(getIntent().getStringExtra("thePuppy"), Puppy.class);
+        setText(this, id.name, thePuppy.getName());
     }
 
     @Override
