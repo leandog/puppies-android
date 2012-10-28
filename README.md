@@ -5,6 +5,7 @@ This is the result of the live-coding session that was done at the [Test Driven 
 ```
 cd cukes
 bundle
+rake
 ```
 
 ## Completed Scenarios
