@@ -2,20 +2,15 @@ package com.leandog.puppies;
 
 import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.hide;
-import static com.leandog.puppies.view.ViewHelper.setText;
 
 import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.text.Html;
 import android.view.*;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.leandog.puppies.R.id;
@@ -27,7 +22,7 @@ import com.leandog.puppies.view.PuppyImageLoader;
 public class PuppiesActivity extends Activity {
 
     private final PuppiesLoader puppiesLoader;
-    private final PuppyImageLoader puppyImageLoader;
+    final PuppyImageLoader puppyImageLoader;
 
     public PuppiesActivity() {
         this(new PuppiesLoader(), new PuppyImageLoader());
@@ -84,44 +79,9 @@ public class PuppiesActivity extends Activity {
         }
 
         protected void onPostExecute(List<Puppy> puppies) {
-            thePuppies.setAdapter(new PuppyAdapter(PuppiesActivity.this, puppies));
+            thePuppies.setAdapter(new PuppyAdapter(PuppiesActivity.this, PuppiesActivity.this, puppies));
             hide(PuppiesActivity.this, id.loading);
         }
-    }
-
-    private class PuppyAdapter extends ArrayAdapter<Puppy> {
-
-        private final List<Puppy> puppies;
-
-        public PuppyAdapter(Context context, final List<Puppy> puppies) {
-            super(context, layout.puppy_item, puppies);
-            this.puppies = puppies;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View theView = convertView;
-
-            if (theView == null) {
-                theView = getInflater().inflate(layout.puppy_item, null);
-            }
-
-            final Puppy thePuppy = puppies.get(position);
-            setText(theView, id.name, thePuppy.getName());
-            setText(theView, id.breed, thePuppy.getBreed());
-            setText(theView, id.gender, thePuppy.getGender());
-            setText(theView, id.summary, Html.fromHtml(thePuppy.getDescription()));
-            
-            final ImageView theHeadshot = findFor(theView, id.headshot);
-            puppyImageLoader.bind(theHeadshot, thePuppy.getImageUrl());
-
-            return theView;
-        }
-
-        private LayoutInflater getInflater() {
-            return (LayoutInflater) getApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
     }
 
 }
