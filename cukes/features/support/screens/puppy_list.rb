@@ -9,4 +9,8 @@ class PuppyList
   def view_for(name)
     self.send "#{name.downcase.gsub(' ', '_')}_view"
   end
+
+  def details_for(name)
+    self.send "#{name.downcase.gsub(' ', '_')}"
+  end
 end
