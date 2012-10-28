@@ -68,6 +68,12 @@ public class PuppiesActivityTest {
         setupActivityToFind(new Puppy("", "Terrier"));
         assertThat(textOf(thePuppyAt(0), id.breed), is("Terrier"));
     }
+    
+    @Test
+    public void itDisplaysTheirGender() {
+        setupActivityToFind(new Puppy("", "", "Female"));
+        assertThat(textOf(thePuppyAt(0), id.gender), is("Female"));
+    }
 
     private void createActivity() {
         shadowOf(activity).create();

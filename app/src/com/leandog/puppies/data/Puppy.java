@@ -17,6 +17,11 @@ public class Puppy {
         puppy.breed = breed;
     }
 
+    public Puppy(final String name, final String breed, final String gender) {
+        this(name, breed);
+        puppy.gender = gender;
+    }
+
     public String getName() {
         return puppy.name;
     }
@@ -25,8 +30,13 @@ public class Puppy {
         return puppy.breed;
     }
 
+    public String getGender() {
+        return puppy.gender;
+    }
+
     private class Info {
+        public String name;
         public String breed;
-        String name;
+        public String gender;
     }
 }
