@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.PuppiesLoader;
@@ -47,15 +46,7 @@ public class PuppiesActivity extends Activity {
         initializeActionBar();
 
         final ListView thePuppies = findFor(this, id.the_puppies_list);
-        thePuppies.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent theDetails = new Intent(PuppiesActivity.this, PuppyTaleActivity.class);
-                theDetails.putExtra("thePuppy", new Gson().toJson(thePuppies.getItemAtPosition(position)));
-                startActivity(theDetails);
-            }
-        });
+        thePuppies.setOnItemClickListener(new OnDisplayThePuppyTale(thePuppies));
         new AsyncPuppiesLoader(thePuppies).execute();
     }
 
@@ -79,6 +70,25 @@ public class PuppiesActivity extends Activity {
         final ActionBar theActionBar = getActionBar();
         theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         theActionBar.setCustomView(layout.happy_banner);
+    }
+
+    private final class OnDisplayThePuppyTale implements OnItemClickListener {
+        private final ListView thePuppies;
+
+        private OnDisplayThePuppyTale(ListView thePuppies) {
+            this.thePuppies = thePuppies;
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final Intent theDetails = new Intent(PuppiesActivity.this, PuppyTaleActivity.class);
+            theDetails.putExtra("thePuppy", thePuppyAt(position).toJson());
+            startActivity(theDetails);
+        }
+
+        private Puppy thePuppyAt(int position) {
+            return (Puppy) thePuppies.getItemAtPosition(position);
+        }
     }
 
     private final class AsyncPuppiesLoader extends AsyncTask<Void, Void, List<Puppy>> {

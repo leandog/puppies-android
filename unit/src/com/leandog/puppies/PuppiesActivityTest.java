@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
@@ -97,15 +96,12 @@ public class PuppiesActivityTest {
     
     @Test
     public void itCanDisplayMoreDetails() {
-        Puppy sparky = new Puppy("Sparky");
+        final Puppy sparky = new Puppy("Sparky");
         setupActivityToFind(sparky);
         
-        int whichPuppy = 0;
-        thePuppies().getOnItemClickListener().onItemClick(null, null, whichPuppy, 0);
-
-        final Intent theDetails = StartedMatcher.createIntent(PuppyTaleActivity.class, "thePuppy", new Gson().toJson(sparky));
-        StartedMatcher startedDetails = new StartedMatcher(theDetails);
-        assertThat(activity, startedDetails);
+        clickOn(0);
+        
+        assertThat(activity, started(PuppyTaleActivity.class, "thePuppy", sparky.toJson()));
     }
 
     private void createActivity() {
@@ -124,6 +120,15 @@ public class PuppiesActivityTest {
 
     private View thePuppyAt(int index) {
         return thePuppies().getChildAt(index);
+    }
+
+    private void clickOn(int whichPuppy) {
+        thePuppies().getOnItemClickListener().onItemClick(null, null, whichPuppy, 0);
+    }
+
+    private StartedMatcher started(Class<PuppyTaleActivity> activityClass, String extraKey, String extraValue) {
+        final Intent theDetails = StartedMatcher.createIntent(activityClass, extraKey, extraValue);
+        return new StartedMatcher(theDetails);
     }
 
 }

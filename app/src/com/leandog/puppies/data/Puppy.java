@@ -1,5 +1,7 @@
 package com.leandog.puppies.data;
 
+import com.google.gson.Gson;
+
 public class Puppy {
     
     private Info puppy = new Info();
@@ -48,6 +50,10 @@ public class Puppy {
 
     public String getDescription() {
         return puppy.description == null ? "" : puppy.description;
+    }
+
+    public String toJson() {
+        return new Gson().toJson(this);
     }
 
     private class Info {
