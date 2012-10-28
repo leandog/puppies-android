@@ -42,6 +42,13 @@ public class PuppyTaleActivityTest {
         assertThat(textOf(activity, id.gender), is("Female"));
     }
     
+    @Test
+    public void itDisplaysTheDescription() {
+        final Puppy thePuppy = new Puppy();
+        thePuppy.setDescription("Expected description");
+        createActivityWith(thePuppy);
+        assertThat(textOf(activity, id.description), is("Expected description"));
+    }
 
     private void createActivityWith(final Puppy puppy) {
         activity.setIntent(puppyIntent(puppy));

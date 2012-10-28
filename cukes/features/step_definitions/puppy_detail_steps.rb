@@ -16,5 +16,5 @@ Then /^I know that they are a "(.*?)"$/ do |gender|
 end
 
 Then /^I can see that my puppy "(.*?)"$/ do |description|
-  on(PuppyDetails).description.should == description
+  on(PuppyDetails).description.should match description
 end

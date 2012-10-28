@@ -4,6 +4,7 @@ import static com.leandog.puppies.view.ViewHelper.setText;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,6 +24,7 @@ public class PuppyTaleActivity extends Activity {
         setText(this, id.name, thePuppy.getName());
         setText(this, id.breed, thePuppy.getBreed());
         setText(this, id.gender, thePuppy.getGender());
+        setText(this, id.description, Html.fromHtml(thePuppy.getDescription()));
     }
 
     @Override
