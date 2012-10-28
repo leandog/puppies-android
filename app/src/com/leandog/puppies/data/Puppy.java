@@ -55,6 +55,10 @@ public class Puppy {
     public String toJson() {
         return new Gson().toJson(this);
     }
+    
+    public static Puppy fromJson(final String json) {
+        return new Gson().fromJson(json, Puppy.class);
+    }
 
     private class Info {
         public String name;

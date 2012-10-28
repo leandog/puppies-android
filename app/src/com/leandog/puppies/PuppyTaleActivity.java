@@ -7,7 +7,6 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.gson.Gson;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.Puppy;
@@ -20,7 +19,7 @@ public class PuppyTaleActivity extends Activity {
         setContentView(layout.activity_puppy_tale);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         
-        final Puppy thePuppy = new Gson().fromJson(getIntent().getStringExtra("thePuppy"), Puppy.class);
+        final Puppy thePuppy = getPuppy();
         setText(this, id.name, thePuppy.getName());
     }
 
@@ -29,7 +28,6 @@ public class PuppyTaleActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_puppy_tale, menu);
         return true;
     }
-
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -39,6 +37,10 @@ public class PuppyTaleActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private Puppy getPuppy() {
+        return Puppy.fromJson(getIntent().getStringExtra("thePuppy"));
     }
 
 }
