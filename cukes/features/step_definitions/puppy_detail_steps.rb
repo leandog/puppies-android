@@ -18,3 +18,7 @@ end
 Then /^I can see that my puppy "(.*?)"$/ do |description|
   on(PuppyDetails).description.should match description
 end
+
+Then /^I can look into the eyes of my puppy before I make my decision$/ do
+  on(PuppyDetails).should have_image
+end

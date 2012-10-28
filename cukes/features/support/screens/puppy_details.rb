@@ -11,4 +11,9 @@ class PuppyDetails
     platform.last_json
   end
 
+  def has_image?
+    platform.get_view_by_id 'headshot'
+    platform.last_json['hasDrawable']
+  end
+
 end

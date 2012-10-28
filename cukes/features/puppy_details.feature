@@ -16,14 +16,13 @@ Feature: Displaying the details of a puppy
     When I want to learn more information about "Spud"
     Then I can see that my puppy "is playful and friendly and would make a great addition to your family"
 
+  Scenario: Looking into the eyes of my puppy one last time
+    Given I am looking at the available puppies
+    When I want to learn more information about "Ruby Sue"
+    Then I can look into the eyes of my puppy before I make my decision
+
   @notready
   Scenario: Knowing what my puppy will set me back
     Given I am looking at the available puppies
     When I want to learn more information about "Tipsy"
     Then I know that "Tipsy" can be adopted for "$42.00"
-
-  @notready
-  Scenario: Looking into the eyes of my puppy one last time
-    Given I am looking at the available puppies
-    When I want to learn more information about "Hanna"
-    Then I can look into the eyes of my puppy before I make my decision
