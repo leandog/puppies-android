@@ -6,6 +6,7 @@ class PuppyList
   list_item(:maggie_mae, :text => 'Maggie Mae')
   list_item(:brook, :text => 'Brook')
   list_item(:spud, :text => 'Spud')
+  list_item(:tipsy, :text => 'Tipsy')
 
   def view_for(name)
     self.send "#{name.downcase.gsub(' ', '_')}_view"

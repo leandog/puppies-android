@@ -22,3 +22,7 @@ end
 Then /^I can look into the eyes of my puppy before I make my decision$/ do
   on(PuppyDetails).should have_image
 end
+
+Then /^I know that the adoption fee is "(.*?)"$/ do |fee|
+  on(PuppyDetails).fee.should == fee
+end

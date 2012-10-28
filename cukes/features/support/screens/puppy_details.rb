@@ -5,6 +5,7 @@ class PuppyDetails
   text(:breed, :id => 'breed')
   text(:gender, :id => 'gender')
   text(:description, :id => 'description')
+  text(:fee, :id => 'adoption_fee')
 
   def active?
     platform.wait_for_activity "PuppyTaleActivity"

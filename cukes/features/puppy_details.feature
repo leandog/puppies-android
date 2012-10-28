@@ -21,8 +21,7 @@ Feature: Displaying the details of a puppy
     When I want to learn more information about "Ruby Sue"
     Then I can look into the eyes of my puppy before I make my decision
 
-  @notready
   Scenario: Knowing what my puppy will set me back
     Given I am looking at the available puppies
     When I want to learn more information about "Tipsy"
-    Then I know that "Tipsy" can be adopted for "$42.00"
+    Then I know that the adoption fee is "$42.00"
