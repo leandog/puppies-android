@@ -22,6 +22,7 @@ import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.test.PuppiesTestRunner;
+import com.leandog.puppies.view.ViewHelper;
 
 @RunWith(PuppiesTestRunner.class)
 public class PuppiesActivityTest {
@@ -54,8 +55,7 @@ public class PuppiesActivityTest {
         thePuppiesAre(new Puppy(), new Puppy());
         createActivity();
         
-        final ListView thePuppies = findFor(activity, id.the_puppies_list);
-        assertThat(thePuppies.getChildCount(), is(2));
+        assertThat(thePuppies().getChildCount(), is(2));
     }
 
     private void createActivity() {
@@ -65,6 +65,10 @@ public class PuppiesActivityTest {
     private void thePuppiesAre(final Puppy...puppies) {
         when(puppiesLoader.load())
             .thenReturn(Arrays.asList(puppies));
+    }
+
+    private ListView thePuppies() {
+        return ViewHelper.<ListView>findFor(activity, id.the_puppies_list);
     }
 
 }

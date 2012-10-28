@@ -22,7 +22,7 @@ import com.leandog.puppies.data.Puppy;
 public class PuppiesActivity extends Activity {
 
     private final PuppiesLoader puppiesLoader;
-    
+
     public PuppiesActivity() {
         this(new PuppiesLoader());
     }
@@ -37,30 +37,10 @@ public class PuppiesActivity extends Activity {
         setContentView(layout.activity_puppies);
 
         initializeActionBar();
-        
+
         final ListView thePuppies = findFor(this, id.the_puppies_list);
         thePuppies.setAdapter(new PuppyAdapter(this, puppiesLoader.load()));
         hide(this, id.loading);
-    }
-    
-    private class PuppyAdapter extends ArrayAdapter<Puppy> {
-
-        public PuppyAdapter(Context context, final List<Puppy> puppies) {
-            super(context, layout.puppy_item, puppies);
-        }
-        
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View theView = convertView;
-            
-            if( theView == null) {
-                final LayoutInflater inflater = (LayoutInflater) getApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                theView = inflater.inflate(layout.puppy_item, null);
-            }
-            
-            return theView;
-        }
-        
     }
 
     @Override
@@ -83,6 +63,29 @@ public class PuppiesActivity extends Activity {
         final ActionBar theActionBar = getActionBar();
         theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         theActionBar.setCustomView(layout.happy_banner);
+    }
+
+    private class PuppyAdapter extends ArrayAdapter<Puppy> {
+
+        public PuppyAdapter(Context context, final List<Puppy> puppies) {
+            super(context, layout.puppy_item, puppies);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View theView = convertView;
+
+            if (theView == null) {
+                theView = getInflater().inflate(layout.puppy_item, null);
+            }
+
+            return theView;
+        }
+
+        private LayoutInflater getInflater() {
+            return (LayoutInflater) getApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
     }
 
 }
