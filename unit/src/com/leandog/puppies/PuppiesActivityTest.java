@@ -15,17 +15,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.test.PuppiesTestRunner;
 import com.leandog.puppies.view.PuppyImageLoader;
 import com.leandog.puppies.view.ViewHelper;
+import com.xtremelabs.robolectric.matchers.StartedMatcher;
 
 @RunWith(PuppiesTestRunner.class)
 public class PuppiesActivityTest {
@@ -90,6 +93,19 @@ public class PuppiesActivityTest {
         
         final ImageView theHeadshot = findFor(activity, id.headshot);
         verify(puppyImageLoader).bind(theHeadshot, "http://puppies.herokuapp.com/assets/sparky.png");
+    }
+    
+    @Test
+    public void itCanDisplayMoreDetails() {
+        Puppy sparky = new Puppy("Sparky");
+        setupActivityToFind(sparky);
+        
+        int whichPuppy = 0;
+        thePuppies().getOnItemClickListener().onItemClick(null, null, whichPuppy, 0);
+
+        final Intent theDetails = StartedMatcher.createIntent(PuppyTaleActivity.class, "thePuppy", new Gson().toJson(sparky));
+        StartedMatcher startedDetails = new StartedMatcher(theDetails);
+        assertThat(activity, startedDetails);
     }
 
     private void createActivity() {

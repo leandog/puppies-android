@@ -7,12 +7,18 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.PuppiesLoader;
@@ -41,6 +47,15 @@ public class PuppiesActivity extends Activity {
         initializeActionBar();
 
         final ListView thePuppies = findFor(this, id.the_puppies_list);
+        thePuppies.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent theDetails = new Intent(PuppiesActivity.this, PuppyTaleActivity.class);
+                theDetails.putExtra("thePuppy", new Gson().toJson(thePuppies.getItemAtPosition(position)));
+                startActivity(theDetails);
+            }
+        });
         new AsyncPuppiesLoader(thePuppies).execute();
     }
 
