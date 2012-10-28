@@ -41,11 +41,20 @@ public class Puppy {
     public String getImageUrl() {
         return String.format("http://puppies.herokuapp.com/assets/%s", puppy.image_url);
     }
+    
+    public void setDescription(final String description) {
+        puppy.description = description;
+    }
+
+    public String getDescription() {
+        return puppy.description == null ? "" : puppy.description;
+    }
 
     private class Info {
         public String name;
         public String breed;
         public String gender;
         public String image_url;
+        public String description;
     }
 }

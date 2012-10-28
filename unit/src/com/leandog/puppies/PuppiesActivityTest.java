@@ -79,6 +79,12 @@ public class PuppiesActivityTest {
     }
     
     @Test
+    public void itDisplaysTheSummary() {
+        setupActivityToFind(new Puppy() {{ setDescription("Expected description"); }});
+        assertThat(textOf(thePuppyAt(0), id.summary), is("Expected description"));
+    }
+    
+    @Test
     public void itDisplaysTheirBeautifulFace() {
         setupActivityToFind(new Puppy() {{ setImageUrl("sparky.png"); }});
         
