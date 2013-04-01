@@ -3,6 +3,6 @@ source 'http://rubygems.org'
 gem 'cucumber'
 gem 'rspec'
 gem 'require_all'
-gem 'gametel'
+gem 'gametel', '>= 0.5.7'
 gem 'rake'
 
