@@ -1,4 +1,6 @@
 bin
 gen
 tmp
+app/.settings
+app/local.properties
 Gemfile.lock
