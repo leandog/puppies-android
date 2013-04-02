@@ -20,7 +20,7 @@ Then /^I can see that my puppy "(.*?)"$/ do |description|
 end
 
 Then /^I can look into the eyes of my puppy before I make my decision$/ do
-  on(PuppyDetails).should have_image
+  on(PuppyDetails).wait_for_headshot
 end
 
 Then /^I know that the adoption fee is "(.*?)"$/ do |fee|

@@ -20,7 +20,7 @@ GEM
     faker (1.1.2)
       i18n (~> 0.5)
     ffi (1.6.0)
-    gametel (0.5.7)
+    gametel (0.5.8.1)
       ADB (>= 0.5.5)
       brazenhead (>= 0.4.6)
       page_navigation (>= 0.7)
