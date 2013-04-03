@@ -2,12 +2,8 @@ package com.leandog.puppies;
 
 import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.setText;
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.text.Html;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.leandog.puppies.R.id;
@@ -42,22 +38,6 @@ public class PuppyTaleActivity extends Activity {
         
         final ImageView theHeadshot = findFor(this, id.headshot);
         puppyImageLoader.bind(theHeadshot, thePuppy.getImageUrl());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_puppy_tale, menu);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private Puppy getPuppy() {

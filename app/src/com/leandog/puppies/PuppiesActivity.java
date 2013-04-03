@@ -6,13 +6,9 @@ import static com.leandog.puppies.view.ViewHelper.hide;
 import java.util.List;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -48,22 +44,6 @@ public class PuppiesActivity extends Activity {
         final ListView thePuppies = findFor(this, id.the_puppies_list);
         thePuppies.setOnItemClickListener(new OnDisplayThePuppyTale(thePuppies));
         new AsyncPuppiesLoader(thePuppies).execute();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_puppies, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void initializeActionBar() {
