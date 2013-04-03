@@ -23,7 +23,7 @@ import com.leandog.puppies.view.PuppyImageLoader;
 public class PuppiesActivity extends Activity {
 
     private final PuppiesLoader puppiesLoader;
-    final PuppyImageLoader puppyImageLoader;
+    private final PuppyImageLoader puppyImageLoader;
 
     public PuppiesActivity() {
         this(new PuppiesLoader(), new PuppyImageLoader());
@@ -47,9 +47,8 @@ public class PuppiesActivity extends Activity {
     }
 
     private void initializeActionBar() {
-        final ActionBar theActionBar = getActionBar();
-        theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        theActionBar.setCustomView(layout.happy_banner);
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getActionBar().setCustomView(layout.happy_banner);
     }
 
     private final class OnDisplayThePuppyTale implements OnItemClickListener {
@@ -84,7 +83,7 @@ public class PuppiesActivity extends Activity {
         }
 
         protected void onPostExecute(List<Puppy> puppies) {
-            thePuppies.setAdapter(new PuppyAdapter(PuppiesActivity.this, PuppiesActivity.this, puppies));
+            thePuppies.setAdapter(new PuppyAdapter(puppyImageLoader, PuppiesActivity.this, puppies));
             hide(PuppiesActivity.this, id.loading);
         }
     }

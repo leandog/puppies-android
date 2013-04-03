@@ -16,15 +16,16 @@ import android.widget.ImageView;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.R.layout;
 import com.leandog.puppies.data.Puppy;
+import com.leandog.puppies.view.PuppyImageLoader;
 
 class PuppyAdapter extends ArrayAdapter<Puppy> {
 
-    private final PuppiesActivity puppiesActivity;
     private final List<Puppy> puppies;
+	private final PuppyImageLoader puppyImageLoader;
 
-    public PuppyAdapter(PuppiesActivity puppiesActivity, Context context, final List<Puppy> puppies) {
+    public PuppyAdapter(PuppyImageLoader puppyImageLoader, Context context, List<Puppy> puppies) {
         super(context, layout.puppy_item, puppies);
-        this.puppiesActivity = puppiesActivity;
+		this.puppyImageLoader = puppyImageLoader;
         this.puppies = puppies;
     }
 
@@ -36,16 +37,10 @@ class PuppyAdapter extends ArrayAdapter<Puppy> {
     }
 
     private View getView(View convertView) {
-        View theView = convertView;
-
-        if (theView == null) {
-            theView = getInflater().inflate(layout.puppy_item, null);
-        }
-        
-        return theView;
+    	return convertView == null ? getInflater().inflate(layout.puppy_item, null) : convertView;
     }
 
-    private void displayPuppy(View theView, final Puppy thePuppy) {
+    private void displayPuppy(View theView, Puppy thePuppy) {
         setText(theView, id.name, thePuppy.getName());
         setText(theView, id.breed, thePuppy.getBreed());
         setText(theView, id.gender, thePuppy.getGender());
@@ -55,12 +50,12 @@ class PuppyAdapter extends ArrayAdapter<Puppy> {
     }
 
     private void loadImage(View theView, String imageUrl) {
-        final ImageView theHeadshot = findFor(theView, id.headshot);
-        this.puppiesActivity.puppyImageLoader.bind(theHeadshot, imageUrl);
+        ImageView theHeadshot = findFor(theView, id.headshot);
+        this.puppyImageLoader.bind(theHeadshot, imageUrl);
     }
 
     private LayoutInflater getInflater() {
-        return (LayoutInflater) this.puppiesActivity.getApplication().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 }
