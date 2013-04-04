@@ -1,5 +1,6 @@
 package com.leandog.puppies;
 
+import static com.leandog.puppies.test.Util.Matchers.*;
 import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
@@ -15,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,7 +27,6 @@ import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.test.PuppiesTestRunner;
 import com.leandog.puppies.view.PuppyImageLoader;
 import com.leandog.puppies.view.ViewHelper;
-import com.xtremelabs.robolectric.matchers.StartedMatcher;
 
 @RunWith(PuppiesTestRunner.class)
 public class PuppiesActivityTest {
@@ -124,11 +123,6 @@ public class PuppiesActivityTest {
 
     private void clickOn(int whichPuppy) {
         thePuppies().getOnItemClickListener().onItemClick(null, null, whichPuppy, 0);
-    }
-
-    private StartedMatcher started(Class<PuppyTaleActivity> activityClass, String extraKey, String extraValue) {
-        final Intent theDetails = StartedMatcher.createIntent(activityClass, extraKey, extraValue);
-        return new StartedMatcher(theDetails);
     }
 
 }
