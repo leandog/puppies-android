@@ -29,7 +29,7 @@ public class PuppiesActivity extends Activity {
         this(new PuppiesLoader(), new PuppyImageLoader());
     }
 
-    public PuppiesActivity(final PuppiesLoader puppiesLoader, final PuppyImageLoader puppyImageLoader) {
+    public PuppiesActivity(PuppiesLoader puppiesLoader,PuppyImageLoader puppyImageLoader) {
         this.puppiesLoader = puppiesLoader;
         this.puppyImageLoader = puppyImageLoader;
     }
@@ -41,7 +41,7 @@ public class PuppiesActivity extends Activity {
 
         initializeActionBar();
 
-        final ListView thePuppies = findFor(this, id.the_puppies_list);
+        ListView thePuppies = findFor(this, id.the_puppies_list);
         thePuppies.setOnItemClickListener(new OnDisplayThePuppyTale(thePuppies));
         new AsyncPuppiesLoader(thePuppies).execute();
     }
@@ -52,6 +52,7 @@ public class PuppiesActivity extends Activity {
     }
 
     private final class OnDisplayThePuppyTale implements OnItemClickListener {
+    	
         private final ListView thePuppies;
 
         private OnDisplayThePuppyTale(ListView thePuppies) {

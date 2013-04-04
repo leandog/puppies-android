@@ -19,7 +19,7 @@ public class PuppyTaleActivity extends Activity {
         this(new PuppyImageLoader());
     }
 
-    public PuppyTaleActivity(final PuppyImageLoader puppyImageLoader) {
+    public PuppyTaleActivity(PuppyImageLoader puppyImageLoader) {
         this.puppyImageLoader = puppyImageLoader;
     }
 
@@ -29,14 +29,14 @@ public class PuppyTaleActivity extends Activity {
         setContentView(layout.activity_puppy_tale);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         
-        final Puppy thePuppy = getPuppy();
+        Puppy thePuppy = getPuppy();
         setText(this, id.name, thePuppy.getName());
         setText(this, id.breed, thePuppy.getBreed());
         setText(this, id.gender, thePuppy.getGender());
         setText(this, id.description, Html.fromHtml(thePuppy.getDescription()));
         setText(this, id.adoption_fee, String.format("$%.2f", thePuppy.getFee()));
         
-        final ImageView theHeadshot = findFor(this, id.headshot);
+        ImageView theHeadshot = findFor(this, id.headshot);
         puppyImageLoader.bind(theHeadshot, thePuppy.getImageUrl());
     }
 
