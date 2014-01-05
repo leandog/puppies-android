@@ -15,8 +15,8 @@ import org.robolectric.util.ActivityController;
 import com.leandog.puppies.data.PuppyLoader;
 import com.leandog.puppies.test.PuppiesTestRunner;
 
-//@Config(manifest = "../../../../../puppies_app/AndroidManifest.xml")
-//@RunWith(PuppiesTestRunner.class)
+//@Config(manifest = "AndroidManifest.xml")
+@RunWith(PuppiesTestRunner.class)
 public class PuppiesActivityTest {
 
 //	@Mock private PuppyLoader puppiesLoader;
