@@ -1,5 +1,6 @@
 package com.leandog.puppies;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
@@ -14,25 +15,30 @@ import org.robolectric.util.ActivityController;
 import com.leandog.puppies.data.PuppyLoader;
 import com.leandog.puppies.test.PuppiesTestRunner;
 
-@RunWith(PuppiesTestRunner.class)
-// @Config(manifest = "../../../../../puppies_app/AndroidManifest.xml")
+//@Config(manifest = "../../../../../puppies_app/AndroidManifest.xml")
+//@RunWith(PuppiesTestRunner.class)
 public class PuppiesActivityTest {
 
-	@Mock private PuppyLoader puppiesLoader;
-	private ActivityController<PuppiesActivity> controller;
-	private PuppiesActivity activity;
+//	@Mock private PuppyLoader puppiesLoader;
+//	private ActivityController<PuppiesActivity> controller;
+//	private PuppiesActivity activity;
 
-	@Before
-	public void setup() {
-		controller = Robolectric.buildActivity(PuppiesActivity.class);
-		activity = controller.get();		
-		activity.setPuppyLoader(puppiesLoader);		
-	}
+	//@Before
+//	public void setup() {
+//		controller = Robolectric.buildActivity(PuppiesActivity.class);
+//		activity = controller.get();		
+//		activity.setPuppyLoader(puppiesLoader);		
+//	}
 	
 	@Test
-	public void itRetrievesThePuppies() {
-		controller.create();
-		verify(puppiesLoader).load();
+	public void testSomething() {
+		assertThat(true, is(false));
 	}
+	
+	//@Test
+//	public void itRetrievesThePuppies() {
+//		controller.create();
+//		verify(puppiesLoader).load();
+//	}
 	
 }
