@@ -13,32 +13,28 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
 import com.leandog.puppies.data.PuppyLoader;
+import com.leandog.puppies.shadows.ShadowActionBarActivity;
 import com.leandog.puppies.test.PuppiesTestRunner;
 
-//@Config(manifest = "AndroidManifest.xml")
+@Config(shadows = ShadowActionBarActivity.class)
 @RunWith(PuppiesTestRunner.class)
 public class PuppiesActivityTest {
 
-//	@Mock private PuppyLoader puppiesLoader;
-//	private ActivityController<PuppiesActivity> controller;
-//	private PuppiesActivity activity;
+	@Mock private PuppyLoader puppiesLoader;
+	private ActivityController<PuppiesActivity> controller;
+	private PuppiesActivity activity;
 
-	//@Before
-//	public void setup() {
-//		controller = Robolectric.buildActivity(PuppiesActivity.class);
-//		activity = controller.get();		
-//		activity.setPuppyLoader(puppiesLoader);		
-//	}
-	
-	@Test
-	public void testSomething() {
-		assertThat(true, is(false));
+	@Before
+	public void setup() {
+		controller = Robolectric.buildActivity(PuppiesActivity.class);
+		activity = controller.get();		
+		activity.setPuppyLoader(puppiesLoader);		
 	}
 	
-	//@Test
-//	public void itRetrievesThePuppies() {
-//		controller.create();
-//		verify(puppiesLoader).load();
-//	}
+	@Test
+	public void itRetrievesThePuppies() {
+		controller.create();
+		verify(puppiesLoader).load();
+	}
 	
 }
