@@ -8,10 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.leandog.puppies.R.layout;
+import com.leandog.puppies.data.PuppyLoader;
 
 public class PuppiesActivity extends Activity {
 
-    @Override
+    private PuppyLoader puppiesLoader;
+
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_puppies);
@@ -40,5 +43,9 @@ public class PuppiesActivity extends Activity {
         theActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         theActionBar.setCustomView(layout.happy_banner);
     }
+
+	public void setPuppyLoader(PuppyLoader puppiesLoader) {
+		this.puppiesLoader = puppiesLoader;		
+	}
 
 }
