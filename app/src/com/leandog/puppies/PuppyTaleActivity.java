@@ -13,13 +13,13 @@ import com.leandog.puppies.view.PuppyImageLoader;
 
 public class PuppyTaleActivity extends Activity {
 
-    private final PuppyImageLoader puppyImageLoader;
+    private PuppyImageLoader puppyImageLoader;
     
     public PuppyTaleActivity() {
-        this(new PuppyImageLoader());
+        puppyImageLoader = new PuppyImageLoader();
     }
-
-    public PuppyTaleActivity(PuppyImageLoader puppyImageLoader) {
+    
+    public void setImageLoader(final PuppyImageLoader puppyImageLoader) {
         this.puppyImageLoader = puppyImageLoader;
     }
 

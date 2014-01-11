@@ -10,25 +10,36 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.util.ActivityController;
 
 import android.content.Intent;
 import android.widget.ImageView;
 
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.Puppy;
-import com.leandog.puppies.test.PuppiesTestRunner;
+import com.leandog.puppies.shadows.ShadowActionBarActivity;
 import com.leandog.puppies.view.PuppyImageLoader;
 
-@RunWith(PuppiesTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = "../app/AndroidManifest.xml", shadows = ShadowActionBarActivity.class)
 public class PuppyTaleActivityTest {
     
     private PuppyTaleActivity activity;
     
     @Mock PuppyImageLoader puppyImageLoader;
 
+    private ActivityController<PuppyTaleActivity> controller;
+
     @Before
     public void setUp() {
-        activity = new PuppyTaleActivity(puppyImageLoader);
+        MockitoAnnotations.initMocks(this);
+        controller = Robolectric.buildActivity(PuppyTaleActivity.class);
+        activity = controller.get();
+        activity.setImageLoader(puppyImageLoader);
     }
 
     @Test
@@ -76,12 +87,12 @@ public class PuppyTaleActivityTest {
     }
 
     private void createActivityWith(final Puppy puppy) {
-        activity.setIntent(puppyIntent(puppy));
-        activity.onCreate(null);
+        controller.withIntent(puppyIntent(puppy));
+        controller.create();
     }
 
     private Intent puppyIntent(final Puppy puppy) {
-        final Intent intent = new Intent();
+        final Intent intent = new Intent(Robolectric.application, PuppyTaleActivity.class);
         intent.putExtra("thePuppy", puppy.toJson());
         return intent;
     }

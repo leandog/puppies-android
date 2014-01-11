@@ -22,15 +22,19 @@ import com.leandog.puppies.view.PuppyImageLoader;
 
 public class PuppiesActivity extends Activity {
 
-    private final PuppiesLoader puppiesLoader;
-    private final PuppyImageLoader puppyImageLoader;
+    private PuppiesLoader puppiesLoader;
+    private PuppyImageLoader puppyImageLoader;
 
     public PuppiesActivity() {
-        this(new PuppiesLoader(), new PuppyImageLoader());
+        puppiesLoader = new PuppiesLoader();
+        puppyImageLoader = new PuppyImageLoader();
     }
 
-    public PuppiesActivity(PuppiesLoader puppiesLoader,PuppyImageLoader puppyImageLoader) {
+    public void setPuppiesLoader(final PuppiesLoader puppiesLoader) {
         this.puppiesLoader = puppiesLoader;
+    }
+
+    public void setPuppyImageLoader(final PuppyImageLoader puppyImageLoader) {
         this.puppyImageLoader = puppyImageLoader;
     }
 

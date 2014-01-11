@@ -1,20 +1,21 @@
 package com.leandog.puppies;
 
-import static com.leandog.puppies.test.Util.Matchers.*;
 import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.textOf;
-import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.*;
 import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.util.ActivityController;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -24,11 +25,12 @@ import android.widget.ProgressBar;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
-import com.leandog.puppies.test.PuppiesTestRunner;
+import com.leandog.puppies.shadows.ShadowActionBarActivity;
 import com.leandog.puppies.view.PuppyImageLoader;
 import com.leandog.puppies.view.ViewHelper;
 
-@RunWith(PuppiesTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest = "../app/AndroidManifest.xml", shadows = ShadowActionBarActivity.class)
 public class PuppiesActivityTest {
     
     private PuppiesActivity activity;
@@ -36,9 +38,15 @@ public class PuppiesActivityTest {
     @Mock PuppiesLoader puppiesLoader;
     @Mock PuppyImageLoader puppyImageLoader;
 
+    private ActivityController<PuppiesActivity> controller;
+
     @Before
     public void setUp() {
-        activity = new PuppiesActivity(puppiesLoader, puppyImageLoader);
+        MockitoAnnotations.initMocks(this);
+        controller = Robolectric.buildActivity(PuppiesActivity.class);
+        activity = controller.get();
+        activity.setPuppiesLoader(puppiesLoader);
+        activity.setPuppyImageLoader(puppyImageLoader);
     }
     
     @Test
@@ -90,7 +98,7 @@ public class PuppiesActivityTest {
         setupActivityToFind(new Puppy() {{ setImageUrl("sparky.png"); }});
         
         final ImageView theHeadshot = findFor(activity, id.headshot);
-        verify(puppyImageLoader).bind(theHeadshot, "http://puppies.herokuapp.com/assets/sparky.png");
+        verify(puppyImageLoader, times(2)).bind(theHeadshot, "http://puppies.herokuapp.com/assets/sparky.png");
     }
     
     @Test
@@ -103,8 +111,13 @@ public class PuppiesActivityTest {
         assertThat(activity, started(PuppyTaleActivity.class, "thePuppy", sparky.toJson()));
     }
 
+    private StartedMatcher started(final Class<? extends Activity> expectedClass, final String string, String json) {
+        return new StartedMatcher(expectedClass, string, json);
+    }
+
     private void createActivity() {
-        shadowOf(activity).create();
+        controller.create();
+        Robolectric.shadowOf(thePuppies()).populateItems();
     }
 
     private void setupActivityToFind(final Puppy...puppies) {

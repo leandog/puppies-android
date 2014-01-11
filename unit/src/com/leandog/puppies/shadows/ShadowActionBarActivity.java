@@ -1,11 +1,12 @@
 package com.leandog.puppies.shadows;
 
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowActivity;
+
 import android.app.ActionBar;
 import android.app.Activity;
 
-import com.xtremelabs.robolectric.internal.Implementation;
-import com.xtremelabs.robolectric.internal.Implements;
-import com.xtremelabs.robolectric.shadows.ShadowActivity;
 
 @Implements(Activity.class)
 public class ShadowActionBarActivity extends ShadowActivity {
