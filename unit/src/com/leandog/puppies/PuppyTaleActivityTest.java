@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
@@ -22,9 +20,10 @@ import android.widget.ImageView;
 import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.shadows.ShadowActionBarActivity;
+import com.leandog.puppies.test.PuppiesTestRunner;
 import com.leandog.puppies.view.PuppyImageLoader;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(PuppiesTestRunner.class)
 @Config(manifest = "../app/AndroidManifest.xml", shadows = ShadowActionBarActivity.class)
 public class PuppyTaleActivityTest {
     
@@ -36,7 +35,6 @@ public class PuppyTaleActivityTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         controller = Robolectric.buildActivity(PuppyTaleActivity.class);
         activity = controller.get();
         activity.setImageLoader(puppyImageLoader);

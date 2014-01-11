@@ -4,16 +4,18 @@ import static com.leandog.puppies.view.ViewHelper.findFor;
 import static com.leandog.puppies.view.ViewHelper.textOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.robolectric.Robolectric.shadowOf;
+
 import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
@@ -26,10 +28,11 @@ import com.leandog.puppies.R.id;
 import com.leandog.puppies.data.PuppiesLoader;
 import com.leandog.puppies.data.Puppy;
 import com.leandog.puppies.shadows.ShadowActionBarActivity;
+import com.leandog.puppies.test.PuppiesTestRunner;
 import com.leandog.puppies.view.PuppyImageLoader;
 import com.leandog.puppies.view.ViewHelper;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(PuppiesTestRunner.class)
 @Config(manifest = "../app/AndroidManifest.xml", shadows = ShadowActionBarActivity.class)
 public class PuppiesActivityTest {
     
@@ -42,7 +45,6 @@ public class PuppiesActivityTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         controller = Robolectric.buildActivity(PuppiesActivity.class);
         activity = controller.get();
         activity.setPuppiesLoader(puppiesLoader);
@@ -117,7 +119,7 @@ public class PuppiesActivityTest {
 
     private void createActivity() {
         controller.create();
-        Robolectric.shadowOf(thePuppies()).populateItems();
+        shadowOf(thePuppies()).populateItems();
     }
 
     private void setupActivityToFind(final Puppy...puppies) {
