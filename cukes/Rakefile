@@ -13,9 +13,5 @@ end
 
 task :cucumber => :features 
 
-
-task :default => [] do
-  Rake::Task[:build_app].execute
-  Rake::Task[:features].execute
-end
+task :default => [:build_app, :features]
 
