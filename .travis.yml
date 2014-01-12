@@ -4,6 +4,7 @@ notifications:
   email:
     - levi@leviwilson.com
 script:
+  - ant units
   - cd cukes
   - bundle install
   - rake
